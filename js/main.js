@@ -1,4 +1,7 @@
 const getRandomInt = (min, max) => {
+  if (typeof min !== 'number' || typeof max !== 'number') {
+    return NaN;
+  }
   if (min < 0 || max < 0) {
     return NaN;
   }
@@ -11,6 +14,9 @@ const getRandomInt = (min, max) => {
 getRandomInt(1, 5);
 
 const getRandomFloat = (min, max, count = 1) => {
+  if (typeof min !== 'number' || typeof max !== 'number') {
+    return NaN;
+  }
   if (min < 0 || max < 0 || count < 0) {
     return NaN;
   }
