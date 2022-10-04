@@ -16,8 +16,8 @@ const getRandomFloat = (min, max, count = 1) => {
   }
   const lower = Math.min(min, max);
   const upper = Math.max(min, max);
-  const randomFlaot = Math.random() * (upper - lower) + lower;
-  return Number(randomFlaot.toFixed(count));
+  const randomFloat = Math.random() * (upper - lower) + lower;
+  return Number(randomFloat.toFixed(count));
 };
 
 getRandomFloat(1, 3, 2);
