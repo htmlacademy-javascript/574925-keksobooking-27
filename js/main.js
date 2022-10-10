@@ -10,7 +10,6 @@ const getRandomInt = (min, max) => {
   const randomInt = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(randomInt);
 };
-getRandomInt(1, 5);
 
 const getRandomFloat = (min, max, count = 1) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
@@ -24,7 +23,6 @@ const getRandomFloat = (min, max, count = 1) => {
   const randomFloat = Math.random() * (upper - lower) + lower;
   return Number(randomFloat.toFixed(count));
 };
-getRandomFloat(1, 3, 2);
 
 // const ANNOUNCEMENT_COUNT = 10;
 /**
@@ -42,14 +40,40 @@ const randomIntUrl = (String(getRandomInt(1, 10)).padStart(2, '0'));
 const createAuthor = () => ({
   avatar: `img/avatars/user${randomIntUrl}.png`
 });
-const offerTitle = 'Обьявление аренды';
+const offerTitle = 'Объявление арены жилья';
+const offerDescription = 'Специально для вас, наша конура по цене дворца';
+const latMin = 35.65000;
+const latMax = 35.70000;
+const lngMin = 139.70000;
+const lngMax = 139.80000;
+const Location = function (lat, lng) {
+  this.lat = lat;
+  this.lng = lng;
+};
+const someLocation = new Location(
+  getRandomFloat(latMin, latMax, 5),
+  getRandomFloat(lngMin, lngMax, 5)
+);
+const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const checkinTime = ['12:00', '13:00', '14:00'];
+const checkoutTime = ['12:00', '13:00', '14:00'];
+const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
 
 const createOffer = () => ({
-  author: createAuthor(),
   title: offerTitle,
-  price: getRandomInt(100, 1000),
-  rooms: getRandomInt(1, 5),
+  address: `${someLocation.lat}, ${someLocation.lng}`,
+  price: getRandomInt(0, 100000),
+  rooms: getRandomInt(1, 3),
+  guests: getRandomInt(1, 3),
+  description: offerDescription,
 });
-createOffer();
-// console.log(createOffer());
+
+const getOffer = () => ({
+  author: createAuthor(),
+  offer: createOffer(),
+  location: someLocation
+});
+getOffer();
+console.log(getOffer());
