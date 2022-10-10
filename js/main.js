@@ -24,28 +24,25 @@ const getRandomFloat = (min, max, count = 1) => {
   return Number(randomFloat.toFixed(count));
 };
 
-// const ANNOUNCEMENT_COUNT = 10;
-/**
- *  *
- * const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
- * const createOffer = () => ({
-    author: '',
-    offer:  '',
-    location:  '',
-  });
- * const announcements = Array.from({length: ANNOUNCEMENT_COUNT}, createOffer);
- */
-
 const randomIntUrl = (String(getRandomInt(1, 10)).padStart(2, '0'));
+
 const createAuthor = () => ({
   avatar: `img/avatars/user${randomIntUrl}.png`
 });
-const offerTitle = 'Объявление арены жилья';
+
+const offerTitle = 'Объявление аренды жилья';
 const offerDescription = 'Специально для вас, наша конура по цене дворца';
 const latMin = 35.65000;
 const latMax = 35.70000;
 const lngMin = 139.70000;
 const lngMax = 139.80000;
+const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const checkinTime = ['12:00', '13:00', '14:00'];
+const checkoutTime = ['12:00', '13:00', '14:00'];
+const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+const ANNOUNCEMENT_COUNT = 10;
+
 const Location = function (lat, lng) {
   this.lat = lat;
   this.lng = lng;
@@ -54,20 +51,30 @@ const someLocation = new Location(
   getRandomFloat(latMin, latMax, 5),
   getRandomFloat(lngMin, lngMax, 5)
 );
-const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const checkinTime = ['12:00', '13:00', '14:00'];
-const checkoutTime = ['12:00', '13:00', '14:00'];
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
+const getRandomValue = (array) => {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  const randomIndexValue = array[randomIndex];
+  return randomIndexValue;
+};
+
+const createArrRandomLength = ([...source], maxLength) => Array.from(
+  { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
+  () => source.splice(Math.random() * source.length | 0, 1)[0]
+);
 
 const createOffer = () => ({
   title: offerTitle,
   address: `${someLocation.lat}, ${someLocation.lng}`,
   price: getRandomInt(0, 100000),
   rooms: getRandomInt(1, 3),
+  type: getRandomValue(typeOfBuilding),
   guests: getRandomInt(1, 3),
+  checkin: getRandomValue(checkinTime),
+  checkoutTime: getRandomValue(checkoutTime),
   description: offerDescription,
+  features: createArrRandomLength(features, features.length),
+  photos: createArrRandomLength(photos, photos.length)
 });
 
 const getOffer = () => ({
@@ -75,5 +82,6 @@ const getOffer = () => ({
   offer: createOffer(),
   location: someLocation
 });
-getOffer();
-console.log(getOffer());
+
+const announcements = Array.from({ length: ANNOUNCEMENT_COUNT }, getOffer);
+console.log(announcements);
