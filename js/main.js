@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const getRandomInt = (min, max) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
