@@ -33,10 +33,10 @@ const createAuthor = () => ({
 
 const offerTitle = 'Объявление аренды жилья';
 const offerDescription = 'Специально для вас, наша конура по цене дворца';
-const latMin = 35.65000;
-const latMax = 35.70000;
-const lngMin = 139.70000;
-const lngMax = 139.80000;
+const LAT_MIN = 35.65000;
+const LAT_MAX = 35.70000;
+const LNG_MIN = 139.70000;
+const LNG_MAX = 139.80000;
 const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const checkinTime = ['12:00', '13:00', '14:00'];
 const checkoutTime = ['12:00', '13:00', '14:00'];
@@ -49,20 +49,29 @@ const Location = function (lat, lng) {
   this.lng = lng;
 };
 const someLocation = new Location(
-  getRandomFloat(latMin, latMax, 5),
-  getRandomFloat(lngMin, lngMax, 5)
+  getRandomFloat(LAT_MIN, LAT_MAX, 5),
+  getRandomFloat(LNG_MIN, LNG_MAX, 5)
 );
 
 const getRandomValue = (array) => {
   const randomIndex = Math.floor(Math.random() * array.length);
-  const randomIndexValue = array[randomIndex];
-  return randomIndexValue;
+  return array[randomIndex];
 };
 
-const createArrRandomLength = ([...source], maxLength) => Array.from(
-  { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
-  () => source.splice(Math.random() * source.length | 0, 1)[0]
-);
+// const createArrRandomLength = ([...source]) => Array.from(
+//   { length: Math.min(source.length, 1 + Math.random() * source.length | 0) },
+//   () => source.splice(Math.random() * source.length | 0, 1)[0]
+// );
+
+const createRandomUniqArray = (array) => {
+  const arr = Array.from(array);
+  const arrayNew = new Array(getRandomInt(1, arr.length));
+  for (let i = 0; i < arrayNew.length; i++) {
+    arrayNew[i] = arr.splice(getRandomInt(0, arr.length - 1), 1).join();
+  }
+  return arrayNew;
+};
+
 
 const createOffer = () => ({
   title: offerTitle,
@@ -74,8 +83,8 @@ const createOffer = () => ({
   checkin: getRandomValue(checkinTime),
   checkoutTime: getRandomValue(checkoutTime),
   description: offerDescription,
-  features: createArrRandomLength(features, features.length),
-  photos: createArrRandomLength(photos, photos.length)
+  features: createRandomUniqArray(features),
+  photos: createRandomUniqArray(photos)
 });
 
 const getOffer = () => ({
