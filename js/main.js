@@ -1,4 +1,17 @@
 /* eslint-disable no-console */
+const ANNOUNCEMENT_COUNT = 10;
+const offerTitle = 'Объявление аренды жилья';
+const offerDescription = 'Специально для вас, наша конура по цене дворца';
+const LAT_MIN = 35.65000;
+const LAT_MAX = 35.70000;
+const LNG_MIN = 139.70000;
+const LNG_MAX = 139.80000;
+const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const checkinTime = ['12:00', '13:00', '14:00'];
+const checkoutTime = ['12:00', '13:00', '14:00'];
+const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+
 const getRandomInt = (min, max) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
@@ -31,23 +44,11 @@ const createAuthor = () => ({
   avatar: `img/avatars/user${randomIntUrl}.png`
 });
 
-const offerTitle = 'Объявление аренды жилья';
-const offerDescription = 'Специально для вас, наша конура по цене дворца';
-const LAT_MIN = 35.65000;
-const LAT_MAX = 35.70000;
-const LNG_MIN = 139.70000;
-const LNG_MAX = 139.80000;
-const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const checkinTime = ['12:00', '13:00', '14:00'];
-const checkoutTime = ['12:00', '13:00', '14:00'];
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const ANNOUNCEMENT_COUNT = 10;
-
 const Location = function (lat, lng) {
   this.lat = lat;
   this.lng = lng;
 };
+
 const someLocation = new Location(
   getRandomFloat(LAT_MIN, LAT_MAX, 5),
   getRandomFloat(LNG_MIN, LNG_MAX, 5)
@@ -71,7 +72,6 @@ const createRandomUniqArray = (array) => {
   }
   return arrayNew;
 };
-
 
 const createOffer = () => ({
   title: offerTitle,
