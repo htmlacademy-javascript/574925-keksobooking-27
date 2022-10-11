@@ -2,10 +2,20 @@
 const ANNOUNCEMENT_COUNT = 10;
 const offerTitle = 'Объявление аренды жилья';
 const offerDescription = 'Специально для вас, наша конура по цене дворца';
+const Price = {
+  MIN: 1,
+  MAX: 100000
+};
 const LAT_MIN = 35.65000;
 const LAT_MAX = 35.70000;
 const LNG_MIN = 139.70000;
 const LNG_MAX = 139.80000;
+const Location = {
+  MIN_LATITUDE: LAT_MIN,
+  MAX_LATITUDE: LAT_MAX,
+  MIN_LONGITUDE: LNG_MIN,
+  MAX_LONGITUDE: LNG_MAX,
+};
 const typeOfBuilding = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const checkinTime = ['12:00', '13:00', '14:00'];
 const checkoutTime = ['12:00', '13:00', '14:00'];
@@ -44,15 +54,10 @@ const createAuthor = () => ({
   avatar: `img/avatars/user${randomIntUrl}.png`
 });
 
-const Location = function (lat, lng) {
-  this.lat = lat;
-  this.lng = lng;
-};
-
-const someLocation = new Location(
-  getRandomFloat(LAT_MIN, LAT_MAX, 5),
-  getRandomFloat(LNG_MIN, LNG_MAX, 5)
-);
+const createLocationData = () => ({
+  lat: getRandomFloat(Location.MIN_LATITUDE, Location.MAX_LATITUDE, 5),
+  lng: getRandomFloat(Location.MIN_LONGITUDE, Location.MAX_LONGITUDE, 5),
+});
 
 const getRandomValue = (array) => {
   const randomIndex = Math.floor(Math.random() * array.length);
@@ -73,10 +78,10 @@ const createRandomUniqArray = (array) => {
   return arrayNew;
 };
 
-const createOffer = () => ({
+const createOfferData = () => ({
   title: offerTitle,
-  address: `${someLocation.lat}, ${someLocation.lng}`,
-  price: getRandomInt(0, 100000),
+  address: `${getRandomFloat(Location.MIN_LATITUDE, Location.MAX_LATITUDE, 5)}, ${getRandomFloat(Location.MIN_LONGITUDE, Location.MAX_LONGITUDE, 5)}`,
+  price: getRandomInt(Price.MIN, Price.MAX),
   rooms: getRandomInt(1, 3),
   type: getRandomValue(typeOfBuilding),
   guests: getRandomInt(1, 3),
@@ -89,9 +94,9 @@ const createOffer = () => ({
 
 const getOffer = () => ({
   author: createAuthor(),
-  offer: createOffer(),
-  location: someLocation
+  offer: createOfferData(),
+  location: createLocationData()
 });
 
-const announcements = Array.from({ length: ANNOUNCEMENT_COUNT }, getOffer);
-console.log(announcements);
+const announcements = () => Array.from({ length: ANNOUNCEMENT_COUNT }, getOffer);
+console.log(announcements());
