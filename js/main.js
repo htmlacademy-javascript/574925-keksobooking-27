@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+import './data.js';
+import './utils';
 const ANNOUNCEMENT_COUNT = 10;
 const offerTitle = 'Объявление аренды жилья';
 const offerDescription = 'Специально для вас, наша конура по цене дворца';
