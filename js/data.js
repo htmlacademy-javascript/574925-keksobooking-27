@@ -5,7 +5,7 @@ import {
   createRandomUniqArray
 } from './utils.js';
 
-const ANNOUNCEMENT_COUNT = 10;
+const ANNOUNCEMENT_COUNT = 1;
 
 const OFFER_TITLE = ['Объявление аренды квартиры', 'Объявление аренды дворца', 'Объявление аренды комнаты', 'Объявление аренды дома', 'Объявление аренды бунгало', 'Объявление аренды коттеджа', 'Объявление аренды палатки', 'Объявление аренды гостиничного номера', 'Объявление аренды картонной коробки', 'Объявление аренды собачьей будки'];
 
@@ -41,6 +41,7 @@ const createAuthorData = () => ({
   avatar: `img/avatars/user${randomIntUrl}.png`
 });
 
+
 const createLocationData = () => ({
   lat: getRandomFloat(Location.MIN_LATITUDE, Location.MAX_LATITUDE, 5),
   lng: getRandomFloat(Location.MIN_LONGITUDE, Location.MAX_LONGITUDE, 5),
@@ -54,7 +55,7 @@ const createOfferData = () => ({
   type: getRandomValue(TYPE_OF_BUILDING),
   guests: getRandomInt(1, 3),
   checkin: getRandomValue(CHECKIN_TIME),
-  checkoutTime: getRandomValue(CHECKOUT_TIME),
+  checkout: getRandomValue(CHECKOUT_TIME),
   description: getRandomValue(OFFER_DESCRIPTION),
   features: createRandomUniqArray(FEATURES),
   photos: createRandomUniqArray(PHOTOS)
