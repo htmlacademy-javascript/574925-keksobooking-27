@@ -60,7 +60,7 @@ const renderCardOffer = () => {
     };
     renderCardFeatures(offerElement, offerItem.offer.features);
 
-    const renderCardPhotos = (cardElement, photos) => {
+    const renderCardPhotos = (cardElement, photos, title) => {
       const photoTemplate = cardElement.querySelector('.popup__photo');
       const photoContainer = cardElement.querySelector('.popup__photos');
 
@@ -72,6 +72,7 @@ const renderCardOffer = () => {
           const photoElement = photoTemplate.cloneNode(true);
 
           photoElement.src = photos[i];
+          photoElement.alt = `Фото из объявления: ${title}`;
 
           photofragment.append(photoElement);
         }
@@ -80,7 +81,7 @@ const renderCardOffer = () => {
         photoContainer.remove();
       }
     };
-    renderCardPhotos(offerElement, offerItem.offer.photos);
+    renderCardPhotos(offerElement, offerItem.offer.photos, offerItem.offer.title);
 
     offerFragment.append(offerElement);
   });
