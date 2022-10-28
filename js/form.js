@@ -1,16 +1,16 @@
-const adForm = document.querySelector('.ad-form');
-const adFormInputs = adForm.querySelectorAll('fieldset');
+const adFormElement = document.querySelector('.ad-form');
+const adFormInputElements = adFormElement.querySelectorAll('fieldset');
 
 const disabledAdForm = () => {
-  adForm.classList.add('ad-form--disabled');
-  adFormInputs.forEach((adFormInput) => {
+  adFormElement.classList.add('ad-form--disabled');
+  adFormInputElements.forEach((adFormInput) => {
     adFormInput.disabled = true;
   });
 };
 
 const enabledAdForm = () => {
-  adForm.classList.remove('ad-form--disabled');
-  adFormInputs.forEach((adFormInput) => {
+  adFormElement.classList.remove('ad-form--disabled');
+  adFormInputElements.forEach((adFormInput) => {
     adFormInput.disabled = false;
   });
 };
