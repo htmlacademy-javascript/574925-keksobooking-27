@@ -16,6 +16,12 @@ const pristine = new Pristine(adFormElement, {
   errorTextClass: 'text-help'
 });
 
+const validateTitle = (value) => value.length >= 30 && value.length <= 100;
+
+pristine.addValidator(adFormElement.querySelector('#title'), validateTitle,
+  'Длинна заголовка должна быть от 30 до 100 символов');
+
+
 adFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
