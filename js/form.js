@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const adFormElement = document.querySelector('.ad-form');
 const adFormInputElements = adFormElement.querySelectorAll('fieldset');
 
@@ -15,42 +16,71 @@ const enabledAdForm = () => {
   });
 };
 
+const addressElement = document.querySelector('#address');
 
-// const roomsToGuests = {
-//   1: ['1'],
-//   2: ['1', '2'],
-//   3: ['1', '2', '3'],
-//   100: ['0'],
-// };
-// const guetsToRooms = {
-//   0: ['100'],
-//   1: ['1', '2', '3'],
-//   2: ['1', '2'],
-//   3: ['3'],
-// };
+const roomsElement = document.querySelector('#room_number');
 
-// const addressElement = document.querySelector('#address');
-// const roomsElement = document.querySelector('#rooms');
-// const capacityElement = document.querySelector('#capacity');
+const capacityElement = document.querySelector('#capacity');
 
-// const pristine = new Pristine(adFormElement, {
-//   classTo: 'ad-form__element',
-//   errorClass: 'ad-form__element--invalid',
-//   successClass: 'ad-form__element--valid',
-//   errorTextParent: 'ad-form__element',
-//   errorTextTag: 'span',
-//   errorTextClass: 'text-help'
-// });
+const onAddressFocus = () => {
+  addressElement.blur();
+};
 
+const pristine = new Pristine(adFormElement, {
+  classTo: 'ad-form__element',
+  errorClass: 'ad-form__element--invalid',
+  successClass: 'ad-form__element--valid',
+  errorTextParent: 'ad-form__element',
+  errorTextTag: 'span',
+  errorTextClass: 'text-help'
+}, true);
 
-// adFormElement.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
+const roomsForGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
 
-//   const isValid = pristine.validate();
-//   if (isValid) {
-//     console.log('Можно отправлять');
-//   } else {
-//     console.log('Форма невалидна');
-//   }
-// });
+const guetsForRooms = {
+  0: ['100'],
+  1: ['1', '2', '3'],
+  2: ['1', '2'],
+  3: ['3'],
+};
+
+const validateCapacity = () => roomsForGuests[roomsElement.value].includes(capacityElement.value);
+
+const getCapacityErrorMessage = () => `Указанное количество комнат вмещает ${roomsForGuests[roomsElement.value].join(' или ')} гостей.`;
+
+const getRoomsErrorMessage = () => `Для указанного количества гостей требуется ${guetsForRooms[capacityElement.value].join(' или ')} комнаты.`;
+
+const onCapacityChange = () => {
+  pristine.validate(capacityElement);
+  pristine.validate(roomsElement);
+};
+const onRoomsChange = () => {
+  pristine.validate(capacityElement);
+  pristine.validate(roomsElement);
+};
+
+pristine.addValidator(roomsElement, validateCapacity, getCapacityErrorMessage);
+
+pristine.addValidator(capacityElement, validateCapacity, getRoomsErrorMessage);
+
+addressElement.addEventListener('focus', onAddressFocus);
+roomsElement.addEventListener('change', onRoomsChange);
+capacityElement.addEventListener('change', onCapacityChange);
+
+adFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    console.log('Можно отправлять');
+  } else {
+    console.log('Форма невалидна');
+  }
+});
+
 export { disabledAdForm, enabledAdForm };
