@@ -6,6 +6,7 @@ renderCardOffer();
 // disabledAdForm();
 disabledMapFilter();
 
+
 const adFormElement = document.querySelector('.ad-form');
 const pristine = new Pristine(adFormElement, {
   classTo: 'ad-form__element',
@@ -16,33 +17,9 @@ const pristine = new Pristine(adFormElement, {
   errorTextClass: 'text-help'
 });
 
-const validateTitle = (value) => value.length >= 30 && value.length <= 100;
-
-pristine.addValidator(adFormElement.querySelector('#title'), validateTitle,
-  'Длинна заголовка должна быть от 30 до 100 символов');
-
-/**
- * const roomsField = orderForm.querySelector('[name="rooms"]');
- * const capacityField = orderForm.querySelector('[name="capacity"]');
-const capacityOption = {
-  '1 комната': ['для 1 гостя'],
-  '2 комнаты': ['для 2 гостей', 'для 1 гостя'],
-  '3 комнаты': ['для 3 гостей' ,'для 2 гостей', 'для 1 гостя'],
-  '100 комнат': ['не для гостей'],
-};
-function validateRooms () {
-  return capacityOption[capacityField.value].includes(capacityField.value);
-function getRoomsErrorMessage () {
-  return `
-    ${roomsField.value}
-    ${dateField.value.toLowerCase()}
-    ${roomsField.value === 'Доставка' ? 'невозможна' : 'невозможен'}
-  `;
-}
-
-pristine.addValidator(roomsField, validateRooms);
-pristine.addValidator(capacityField, validateRooms);
- */
+// const validateTitleLength = (value) => value.length >= 30 && value.length <= 100;
+// const getTitleLengthErrorMessage = () => 'Длинна заголовка должна быть от 30 до 100 символов';
+// pristine.addValidator(adFormElement.querySelector('#title'), validateTitleLength, getTitleLengthErrorMessage);
 
 
 adFormElement.addEventListener('submit', (evt) => {
