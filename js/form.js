@@ -51,9 +51,10 @@ const guetsForRooms = {
 
 const validateCapacity = () => roomsForGuests[roomsElement.value].includes(capacityElement.value);
 
-const getCapacityErrorMessage = () => `Указанное количество комнат вмещает ${roomsForGuests[roomsElement.value].join(' или ')} гостей.`;
+const getCapacityErrorMessage = () => `Указанное количество комнат вмещает ${roomsForGuests[roomsElement.value].join(' или ')} ${Number(roomsForGuests[roomsElement.value]) === 0 ? 'гостей' : 'гостя'}.`;
 
-const getRoomsErrorMessage = () => `Для указанного количества гостей требуется ${guetsForRooms[capacityElement.value].join(' или ')} комнаты.`;
+
+const getRoomsErrorMessage = () => `Для указанного количества гостей требуется ${guetsForRooms[capacityElement.value].join(' или ')} ${Number(guetsForRooms[capacityElement.value]) === 100 ? 'комнат' : 'комнаты'}.`;
 
 const onCapacityChange = () => {
   pristine.validate(capacityElement);
