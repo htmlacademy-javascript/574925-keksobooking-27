@@ -6,7 +6,6 @@ renderCardOffer();
 disabledAdForm();
 disabledMapFilter();
 
-
 const resetButtonElement = document.querySelector('.ad-form__reset');
 const addressElement = document.querySelector('#address');
 
@@ -34,6 +33,13 @@ const mainPinIcon = L.icon({
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
+
+// const otherPinIcon = L.icon({
+//   iconUrl: './img/pin.svg',
+//   iconSize: [40, 40],
+//   iconAnchor: [20, 40],
+// });
+
 
 const mainPinMarker = L.marker(
   {
