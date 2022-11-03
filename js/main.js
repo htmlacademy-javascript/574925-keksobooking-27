@@ -8,6 +8,7 @@ disabledMapFilter();
 
 
 const resetButtonElement = document.querySelector('.ad-form__reset');
+const addressElement = document.querySelector('#address');
 
 const mapElement = L.map('map-canvas')
   .on('load', () => {
@@ -48,7 +49,8 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(mapElement);
 
 mainPinMarker.on('moveend', (evt) => {
-  console.log(evt.target.getLatLng());
+  addressElement.value = evt.target.getLatLng();
+
 });
 
 resetButtonElement.addEventListener('click', () => {
