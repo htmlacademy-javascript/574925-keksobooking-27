@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { getOffers } from './data.js';
 import { disabledAdForm, enabledAdForm, setAddress } from './form.js';
 import { disabledMapFilter, enabledMapFilter } from './filter.js';
