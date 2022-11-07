@@ -35,6 +35,7 @@ const SliderConfig = {
   START: priceElement.placeholder,
   STEP: 1,
 };
+
 const disabledAdForm = () => {
   adFormElement.classList.add('ad-form--disabled');
   adFormInputElements.forEach((adFormInput) => {
@@ -50,6 +51,7 @@ const enabledAdForm = () => {
 const setAddress = ({ lat, lng }) => {
   addressElement.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 };
+
 const pristine = new Pristine(adFormElement, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
@@ -58,6 +60,7 @@ const pristine = new Pristine(adFormElement, {
   errorTextTag: 'span',
   errorTextClass: 'text-help'
 }, true);
+
 noUiSlider.create(sliderElement, {
   range: {
     min: SliderConfig.MIN,
@@ -75,60 +78,76 @@ noUiSlider.create(sliderElement, {
     }
   }
 });
+
 const validateCapacity = () => roomsForGuests[roomsElement.value].includes(capacityElement.value);
+
 const getCapacityErrorMessage = () => `Указанное количество комнат вмещает ${roomsForGuests[roomsElement.value].join(' или ')} ${Number(roomsForGuests[roomsElement.value]) === 0 ? 'гостей' : 'гостя'}.`;
+
 const getRoomsErrorMessage = () => `Для указанного количества гостей требуется ${guetsForRooms[capacityElement.value].join(' или ')} ${Number(guetsForRooms[capacityElement.value]) === 100 ? 'комнат' : 'комнаты'}.`;
+
 const onCapacityChange = () => {
   pristine.validate(capacityElement);
   pristine.validate(roomsElement);
 };
+
 const onRoomsChange = () => {
   pristine.validate(capacityElement);
   pristine.validate(roomsElement);
 };
+
 const onAddressFocus = () => {
   addressElement.blur();
 };
+
 pristine.addValidator(roomsElement, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityElement, validateCapacity, getRoomsErrorMessage);
 addressElement.addEventListener('focus', onAddressFocus);
 roomsElement.addEventListener('change', onRoomsChange);
 capacityElement.addEventListener('change', onCapacityChange);
 
-/**
- * изменение цены
- */
 const onPriceChange = () => {
   pristine.validate(typeElement);
 };
+
 const validatePrice = (value) => value >= typeToPrices[typeElement.value] && value <= typeToPrices.max;
+
 const getPriceErrorMessage = () => `Минимальная цена для этого жилья ${typeToPrices[typeElement.value]} руб.`;
 priceElement.addEventListener('change', onPriceChange);
 pristine.addValidator(priceElement, validatePrice, getPriceErrorMessage);
-/**
- * изменение времени заезда/выезда
- */
+
 const setElementValue = (element, newValue) => {
   element.value = newValue.target.value;
 };
+
 timeInElement.addEventListener('change', (evt) => {
   setElementValue(timeOutElement, evt);
 });
+
 timeOutElement.addEventListener('change', (evt) => {
   setElementValue(timeInElement, evt);
 });
 
+typeElement.addEventListener('change', () => {
+  sliderElement.noUiSlider.set(typeToPrices[typeElement.value]);
+  SliderConfig.MIN = typeToPrices[typeElement.value];
+  sliderElement.noUiSlider.updateOptions({
+    range: {
+      'min': typeToPrices[typeElement.value],
+      'max': SliderConfig.MAX
+    }
+  });
+  sliderElement.noUiSlider.set(typeToPrices[typeElement.value]);
+});
 
 sliderElement.noUiSlider.on('update', () => {
   priceElement.value = sliderElement.noUiSlider.get();
   priceElement.placeholder = typeToPrices[typeElement.value];
 });
-typeElement.addEventListener('change', () => {
-  sliderElement.noUiSlider.set(typeToPrices[typeElement.value]);
-});
+
 priceElement.addEventListener('input', (evt) => {
   sliderElement.noUiSlider.set(evt.target.value);
 });
+
 adFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
