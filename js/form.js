@@ -177,6 +177,7 @@ const setOnFormSubmit = (cb) => {
   });
 };
 
+
 const setOnFormReset = (cb) => {
   adFormElement.addEventListener('reset', () => {
     resetForm();
