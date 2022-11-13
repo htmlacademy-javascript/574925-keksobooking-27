@@ -3,8 +3,6 @@ import { renderCardOffer } from './template.js';
 const OFFER_COUNT = 10;
 const mapElement = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(mapElement);
-// const resetButtonElement = document.querySelector('.ad-form__reset');
-// const addressElement = document.querySelector('#address');
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -68,5 +66,13 @@ const setOnMapLoad = (cb) => {
 const setOnMainPinMove = (cb) => {
   mainPinMarker.on('move', (evt) => cb(evt.target.getLatLng()));
 };
-
-export { initMap, setOnMapLoad, setOnMainPinMove, setOtherPins };
+/**
+ *
+ */
+const setMainPinCoordinate = (coordinate) => {
+  mainPinMarker.setLatLng(coordinate);
+};
+/**
+ *
+ */
+export { initMap, setOnMapLoad, setOnMainPinMove, setOtherPins, setMainPinCoordinate };

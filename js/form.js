@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const roomsForGuests = {
   1: ['1'],
   2: ['1', '2'],
@@ -29,6 +28,7 @@ const timeInElement = document.querySelector('#timein');
 const timeOutElement = document.querySelector('#timeout');
 const typeElement = document.querySelector('#type');
 const sliderElement = document.querySelector('.ad-form__slider');
+const submitButtonElement = document.querySelector('.ad-form__submit');
 const SliderConfig = {
   MIN: 0,
   MAX: 100000,
@@ -148,15 +148,40 @@ priceElement.addEventListener('input', (evt) => {
   sliderElement.noUiSlider.set(evt.target.value);
 });
 
-adFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const disableSubmitButton = () => {
+  submitButtonElement.disabled = true;
+  submitButtonElement.textContent = 'Публикую...';
+};
 
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }
-});
+const enableSubmitButton = () => {
+  submitButtonElement.disabled = false;
+  submitButtonElement.textContent = 'Опубликовать';
+};
 
-export { disabledAdForm, enabledAdForm, setAddress };
+const resetForm = () => {
+  adFormElement.reset();
+  sliderElement.noUiSlider.set(SliderConfig.START);
+  priceElement.value = SliderConfig.START;
+  priceElement.placeholder = SliderConfig.START;
+};
+
+const setOnFormSubmit = (cb) => {
+  adFormElement.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      disableSubmitButton();
+      await cb(new FormData(evt.target));
+      enableSubmitButton();
+    }
+  });
+};
+
+const setOnFormReset = (cb) => {
+  adFormElement.addEventListener('reset', () => {
+    resetForm();
+    cb();
+  });
+};
+
+export { disabledAdForm, enabledAdForm, setAddress, resetForm, setOnFormSubmit, setOnFormReset };
