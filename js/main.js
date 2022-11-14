@@ -11,13 +11,13 @@ import {
 import { disabledMapFilter, enabledMapFilter } from './filter.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import { getData, sendData } from './api.js';
+import { setAvatar } from './avatar.js';
 import { showAlert } from './utils.js';
 
 const START_COORDINATE = {
   lat: 35.70000,
   lng: 139.42500,
 };
-
 
 const resetCoordinate = () => {
   setMainPinCoordinate(START_COORDINATE);
@@ -38,6 +38,7 @@ const onSendDataSuccess = () => {
 setOnMapLoad(() => {
   setOnMainPinMove(setAddress);
   enabledAdForm();
+  setAvatar();
   resetCoordinate();
 });
 
