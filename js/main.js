@@ -12,6 +12,7 @@ import { disabledMapFilter, enabledMapFilter } from './filter.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { setAvatar } from './avatar.js';
+import { setPhotos } from './photos.js';
 import { showAlert } from './utils.js';
 
 const START_COORDINATE = {
@@ -39,6 +40,7 @@ setOnMapLoad(() => {
   setOnMainPinMove(setAddress);
   enabledAdForm();
   setAvatar();
+  setPhotos();
   resetCoordinate();
 });
 

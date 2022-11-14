@@ -59,6 +59,20 @@ const showAlert = (message) => {
   }, ALERT_SHOW_RIME);
 };
 
+const setImages = (fileChooserElement, previewElement) => {
+  const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+  const file = fileChooserElement.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  previewElement.style.display = 'block';
+  previewElement.style.objectFit = 'contain';
+
+  if (matches) {
+    previewElement.src = URL.createObjectURL(file);
+  }
+};
+
 function debounce(callback, timeoutDelay = 500) {
   let timeoutId;
 
@@ -74,5 +88,6 @@ export {
   getRandomValue,
   createRandomUniqArray,
   showAlert,
+  setImages,
   debounce
 };
