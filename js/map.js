@@ -1,6 +1,6 @@
 import { renderCardOffer } from './template.js';
+import { OFFERS_COUNT } from './filter.js';
 
-const OFFER_COUNT = 10;
 const mapElement = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(mapElement);
 
@@ -56,7 +56,7 @@ const createOtherPinMakers = (offers) => {
 
 const setOtherPins = (offers) => {
   markerGroup.clearLayers();
-  createOtherPinMakers(offers.slice(0, OFFER_COUNT));
+  createOtherPinMakers(offers.slice(0, OFFERS_COUNT));
 };
 
 const setOnMapLoad = (cb) => {
@@ -66,13 +66,9 @@ const setOnMapLoad = (cb) => {
 const setOnMainPinMove = (cb) => {
   mainPinMarker.on('move', (evt) => cb(evt.target.getLatLng()));
 };
-/**
- *
- */
+
 const setMainPinCoordinate = (coordinate) => {
   mainPinMarker.setLatLng(coordinate);
 };
-/**
- *
- */
+
 export { initMap, setOnMapLoad, setOnMainPinMove, setOtherPins, setMainPinCoordinate };

@@ -93,5 +93,4 @@ const renderCardOffer = (offerItem) => {
   return offerCardElement;
 };
 
-
 export { renderCardOffer };

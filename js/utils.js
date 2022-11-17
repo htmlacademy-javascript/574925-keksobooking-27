@@ -1,4 +1,4 @@
-
+const ALERT_SHOW_RIME = 5000;
 const getRandomInt = (min, max) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
@@ -39,7 +39,6 @@ const createRandomUniqArray = (array) => {
   return arrayNew;
 };
 
-const ALERT_SHOW_RIME = 5000;
 const showAlert = (message) => {
   const alert = document.createElement('div');
   alert.style.position = 'absolute';
@@ -59,14 +58,12 @@ const showAlert = (message) => {
   }, ALERT_SHOW_RIME);
 };
 
-const setImages = (fileChooserElement, previewElement) => {
+const setImage = (chooserElement, previewElement) => {
   const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-  const file = fileChooserElement.files[0];
+
+  const file = chooserElement.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-
-  previewElement.style.display = 'block';
-  previewElement.style.objectFit = 'contain';
 
   if (matches) {
     previewElement.src = URL.createObjectURL(file);
@@ -88,6 +85,6 @@ export {
   getRandomValue,
   createRandomUniqArray,
   showAlert,
-  setImages,
+  setImage,
   debounce
 };
