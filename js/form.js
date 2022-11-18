@@ -206,9 +206,9 @@ const setPhotos = () => {
     photoContainerElement.innerHTML = '';
     const previewPhotoElement = document.createElement('img');
     setImage(photoChooserElement, previewPhotoElement);
-    previewPhotoElement.style.maxWidth = '100%';
-    previewPhotoElement.style.height = 'auto';
-    previewPhotoElement.style.objectFit = 'contain';
+    previewPhotoElement.style.width = '100%';
+    previewPhotoElement.style.height = '70px';
+    previewPhotoElement.style.objectFit = 'cover';
     photoContainerElement.append(previewPhotoElement);
   });
 };
