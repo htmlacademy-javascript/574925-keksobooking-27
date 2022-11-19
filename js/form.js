@@ -1,20 +1,4 @@
 import { setImage } from './utils.js';
-const adFormElement = document.querySelector('.ad-form');
-const resetButtonElement = adFormElement.querySelector('.ad-form__reset');
-const adFormInputElements = adFormElement.querySelectorAll('fieldset');
-const addressElement = document.querySelector('#address');
-const capacityElement = document.querySelector('#capacity');
-const roomsElement = document.querySelector('#room_number');
-const priceElement = document.querySelector('#price');
-const timeInElement = document.querySelector('#timein');
-const timeOutElement = document.querySelector('#timeout');
-const typeElement = document.querySelector('#type');
-const sliderElement = document.querySelector('.ad-form__slider');
-const submitButtonElement = document.querySelector('.ad-form__submit');
-const avatarChooserElement = document.querySelector('#avatar');
-const previewAvatarElement = document.querySelector('.ad-form-header__preview img');
-const photoChooserElement = document.querySelector('#images');
-const photoContainerElement = document.querySelector('.ad-form__photo');
 
 const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const roomsForGuests = {
@@ -37,6 +21,24 @@ const typeToPrices = {
   palace: 10000,
   max: 100000,
 };
+
+const adFormElement = document.querySelector('.ad-form');
+const resetButtonElement = adFormElement.querySelector('.ad-form__reset');
+const adFormInputElements = adFormElement.querySelectorAll('fieldset');
+const addressElement = document.querySelector('#address');
+const capacityElement = document.querySelector('#capacity');
+const roomsElement = document.querySelector('#room_number');
+const priceElement = document.querySelector('#price');
+const timeInElement = document.querySelector('#timein');
+const timeOutElement = document.querySelector('#timeout');
+const typeElement = document.querySelector('#type');
+const sliderElement = document.querySelector('.ad-form__slider');
+const submitButtonElement = document.querySelector('.ad-form__submit');
+const avatarChooserElement = document.querySelector('#avatar');
+const previewAvatarElement = document.querySelector('.ad-form-header__preview img');
+const photoChooserElement = document.querySelector('#images');
+const photoContainerElement = document.querySelector('.ad-form__photo');
+
 const SliderConfig = {
   MIN: 0,
   MAX: 100000,

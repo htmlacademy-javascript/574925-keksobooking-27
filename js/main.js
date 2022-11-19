@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { initMap, setOnMapLoad, setOnMainPinMove, setOtherPins, setMainPinCoordinate } from './map.js';
 import {
   enabledAdForm,

@@ -1,5 +1,3 @@
-const offerTemplateElement = document.querySelector('#card').content.querySelector('.popup');
-
 const TypesEngToRus = {
   FLAT: 'Квартира',
   BUNGALOW: 'Бунгало',
@@ -7,6 +5,7 @@ const TypesEngToRus = {
   PALACE: 'Дворец',
   HOTEL: 'Отель',
 };
+const offerTemplateElement = document.querySelector('#card').content.querySelector('.popup');
 
 const renderData = (data, dataElement) => {
   if (data && data.length) {

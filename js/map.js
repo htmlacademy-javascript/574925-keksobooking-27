@@ -3,7 +3,7 @@ import { OFFERS_COUNT } from './filter.js';
 
 const mapElement = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(mapElement);
-const mapLayer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const mapLayerImg = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
@@ -29,7 +29,7 @@ const initMap = (coordinate) => {
   mapElement.setView(coordinate, 10);
 
   L.tileLayer(
-    mapLayer,
+    mapLayerImg,
     {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
