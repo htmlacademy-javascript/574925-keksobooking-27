@@ -2,7 +2,7 @@ const successMessageTemplate = document.querySelector('#success').content.queryS
 const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 const bodyElement = document.querySelector('body');
 
-const getIsEsc = (evt) => evt.key === 'Escape';
+const getIsEsc = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 const onMessageEscKeydown = (evt) => {
   if (getIsEsc(evt)) {
