@@ -1,4 +1,4 @@
-
+const ALERT_SHOW_RIME = 5000;
 const getRandomInt = (min, max) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
@@ -39,7 +39,6 @@ const createRandomUniqArray = (array) => {
   return arrayNew;
 };
 
-const ALERT_SHOW_RIME = 5000;
 const showAlert = (message) => {
   const alert = document.createElement('div');
   alert.style.position = 'absolute';
@@ -59,10 +58,33 @@ const showAlert = (message) => {
   }, ALERT_SHOW_RIME);
 };
 
+const setImage = (chooserElement, previewElement) => {
+  const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+  const file = chooserElement.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    previewElement.src = URL.createObjectURL(file);
+  }
+};
+
+function debounce(callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
 export {
   getRandomInt,
   getRandomFloat,
   getRandomValue,
   createRandomUniqArray,
-  showAlert
+  showAlert,
+  setImage,
+  debounce
 };

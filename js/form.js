@@ -1,3 +1,22 @@
+import { setImage } from './utils.js';
+const adFormElement = document.querySelector('.ad-form');
+const resetButtonElement = adFormElement.querySelector('.ad-form__reset');
+const adFormInputElements = adFormElement.querySelectorAll('fieldset');
+const addressElement = document.querySelector('#address');
+const capacityElement = document.querySelector('#capacity');
+const roomsElement = document.querySelector('#room_number');
+const priceElement = document.querySelector('#price');
+const timeInElement = document.querySelector('#timein');
+const timeOutElement = document.querySelector('#timeout');
+const typeElement = document.querySelector('#type');
+const sliderElement = document.querySelector('.ad-form__slider');
+const submitButtonElement = document.querySelector('.ad-form__submit');
+const avatarChooserElement = document.querySelector('#avatar');
+const previewAvatarElement = document.querySelector('.ad-form-header__preview img');
+const photoChooserElement = document.querySelector('#images');
+const photoContainerElement = document.querySelector('.ad-form__photo');
+
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const roomsForGuests = {
   1: ['1'],
   2: ['1', '2'],
@@ -18,17 +37,6 @@ const typeToPrices = {
   palace: 10000,
   max: 100000,
 };
-const adFormElement = document.querySelector('.ad-form');
-const adFormInputElements = adFormElement.querySelectorAll('fieldset');
-const addressElement = document.querySelector('#address');
-const capacityElement = document.querySelector('#capacity');
-const roomsElement = document.querySelector('#room_number');
-const priceElement = document.querySelector('#price');
-const timeInElement = document.querySelector('#timein');
-const timeOutElement = document.querySelector('#timeout');
-const typeElement = document.querySelector('#type');
-const sliderElement = document.querySelector('.ad-form__slider');
-const submitButtonElement = document.querySelector('.ad-form__submit');
 const SliderConfig = {
   MIN: 0,
   MAX: 100000,
@@ -42,12 +50,14 @@ const disabledAdForm = () => {
     adFormInput.disabled = true;
   });
 };
+
 const enabledAdForm = () => {
   adFormElement.classList.remove('ad-form--disabled');
   adFormInputElements.forEach((adFormInput) => {
     adFormInput.disabled = false;
   });
 };
+
 const setAddress = ({ lat, lng }) => {
   addressElement.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 };
@@ -163,6 +173,8 @@ const resetForm = () => {
   sliderElement.noUiSlider.set(SliderConfig.START);
   priceElement.value = SliderConfig.START;
   priceElement.placeholder = SliderConfig.START;
+  previewAvatarElement.src = DEFAULT_AVATAR;
+  photoContainerElement.innerHTML = '';
 };
 
 const setOnFormSubmit = (cb) => {
@@ -177,11 +189,31 @@ const setOnFormSubmit = (cb) => {
   });
 };
 
-const setOnFormReset = (cb) => {
-  adFormElement.addEventListener('reset', () => {
+
+const setOnFormReset = (reset) => {
+  resetButtonElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
     resetForm();
-    cb();
+    reset();
   });
 };
 
-export { disabledAdForm, enabledAdForm, setAddress, resetForm, setOnFormSubmit, setOnFormReset };
+const setAvatar = () => {
+  avatarChooserElement.addEventListener('change', () => {
+    setImage(avatarChooserElement, previewAvatarElement);
+  });
+};
+
+const setPhotos = () => {
+  photoChooserElement.addEventListener('change', () => {
+    photoContainerElement.innerHTML = '';
+    const previewPhotoElement = document.createElement('img');
+    setImage(photoChooserElement, previewPhotoElement);
+    previewPhotoElement.style.width = '100%';
+    previewPhotoElement.style.height = '70px';
+    previewPhotoElement.style.objectFit = 'cover';
+    photoContainerElement.append(previewPhotoElement);
+  });
+};
+
+export { disabledAdForm, enabledAdForm, setAddress, resetForm, setOnFormSubmit, setOnFormReset, setAvatar, setPhotos };
