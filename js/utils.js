@@ -1,4 +1,5 @@
 const ALERT_SHOW_RIME = 5000;
+
 const getRandomInt = (min, max) => {
   if (typeof min !== 'number' || typeof max !== 'number') {
     return NaN;
