@@ -17,15 +17,12 @@ const renderData = (data, dataElement) => {
 
 const renderCardDescription = (cardElement, description) => {
   const descriptionElement = cardElement.querySelector('.popup__description');
-
   descriptionElement.textContent = description;
-
   renderData(description, descriptionElement);
 };
 
 const renderCardFeatures = (cardElement, offerFeatures) => {
   const offerFeaturesContainerElement = cardElement.querySelector('.popup__features');
-
   const offerFeaturesElements = offerFeaturesContainerElement.querySelectorAll('.popup__feature');
 
   if (offerFeatures && offerFeatures.length) {
@@ -70,23 +67,15 @@ const renderCardOffer = (offerItem) => {
   const offerCardElement = offerTemplateElement.cloneNode(true);
 
   offerCardElement.querySelector('.popup__avatar').src = offerItem.author.avatar;
-
   offerCardElement.querySelector('.popup__title').textContent = offerItem.offer.title;
-
   offerCardElement.querySelector('.popup__text--address').textContent = offerItem.offer.address;
-
   offerCardElement.querySelector('[data-price]').textContent = offerItem.offer.price;
-
   offerCardElement.querySelector('.popup__type').textContent = TypesEngToRus[offerItem.offer.type];
-
   offerCardElement.querySelector('.popup__text--capacity').textContent = `${offerItem.offer.rooms} ${offerItem.offer.rooms > 1 ? 'комнаты' : 'комната'} для ${offerItem.offer.guests} ${offerItem.offer.guests > 1 ? 'гостей' : 'гостя'}`;
-
   offerCardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offerItem.offer.checkin}, выезд до ${offerItem.offer.checkout}`;
 
   renderCardDescription(offerCardElement, offerItem.offer.description);
-
   renderCardFeatures(offerCardElement, offerItem.offer.features);
-
   renderCardPhotos(offerCardElement, offerItem.offer.photos, offerItem.offer.title);
 
   return offerCardElement;

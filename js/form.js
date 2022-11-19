@@ -1,5 +1,4 @@
 import { setImage } from './utils.js';
-
 const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const roomsForGuests = {
   1: ['1'],
@@ -21,7 +20,6 @@ const typeToPrices = {
   palace: 10000,
   max: 100000,
 };
-
 const adFormElement = document.querySelector('.ad-form');
 const resetButtonElement = adFormElement.querySelector('.ad-form__reset');
 const adFormInputElements = adFormElement.querySelectorAll('fieldset');
@@ -38,7 +36,6 @@ const avatarChooserElement = document.querySelector('#avatar');
 const previewAvatarElement = document.querySelector('.ad-form-header__preview img');
 const photoChooserElement = document.querySelector('#images');
 const photoContainerElement = document.querySelector('.ad-form__photo');
-
 const SliderConfig = {
   MIN: 0,
   MAX: 100000,
@@ -190,7 +187,6 @@ const setOnFormSubmit = (cb) => {
     }
   });
 };
-
 
 const setOnFormReset = (reset) => {
   resetButtonElement.addEventListener('click', (evt) => {
