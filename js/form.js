@@ -43,14 +43,14 @@ const SliderConfig = {
   STEP: 1,
 };
 
-const disabledAdForm = () => {
+const disableAdForm = () => {
   adFormElement.classList.add('ad-form--disabled');
   adFormInputElements.forEach((adFormInput) => {
     adFormInput.disabled = true;
   });
 };
 
-const enabledAdForm = () => {
+const enableAdForm = () => {
   adFormElement.classList.remove('ad-form--disabled');
   adFormInputElements.forEach((adFormInput) => {
     adFormInput.disabled = false;
@@ -214,4 +214,4 @@ const setPhotos = () => {
   });
 };
 
-export { disabledAdForm, enabledAdForm, setAddress, resetForm, setOnFormSubmit, setOnFormReset, setAvatar, setPhotos };
+export { disableAdForm, enableAdForm, setAddress, resetForm, setOnFormSubmit, setOnFormReset, setAvatar, setPhotos };

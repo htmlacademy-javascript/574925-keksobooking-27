@@ -13,7 +13,7 @@ const housingPriceElement = mapFilterElement.querySelector('#housing-price');
 const housingRoomsElement = mapFilterElement.querySelector('#housing-rooms');
 const housingGuestsElement = mapFilterElement.querySelector('#housing-guests');
 
-const disabledMapFilter = () => {
+const disableMapFilter = () => {
   mapFilterElement.classList.add('map__filters--disabled');
   mapFilterfeatureElements.disabled = true;
   mapFilterSelectElements.forEach((mapFilterInput) => {
@@ -21,7 +21,7 @@ const disabledMapFilter = () => {
   });
 };
 
-const enabledMapFilter = () => {
+const enableMapFilter = () => {
   mapFilterElement.classList.remove('map__filters--disabled');
   mapFilterfeatureElements.disabled = false;
   mapFilterSelectElements.forEach((mapFilterInput) => {
@@ -98,4 +98,4 @@ const setOnFilterChange = (cb) => {
   mapFilterElement.addEventListener('change', () => cb());
 };
 
-export { disabledMapFilter, enabledMapFilter, setOnFilterChange, getFilteredOffers, resetFilter, OFFERS_COUNT };
+export { disableMapFilter, enableMapFilter, setOnFilterChange, getFilteredOffers, resetFilter, OFFERS_COUNT };
