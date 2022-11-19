@@ -1,5 +1,6 @@
 import { setImage } from './utils.js';
 const adFormElement = document.querySelector('.ad-form');
+const resetButtonElement = adFormElement.querySelector('.ad-form__reset');
 const adFormInputElements = adFormElement.querySelectorAll('fieldset');
 const addressElement = document.querySelector('#address');
 const capacityElement = document.querySelector('#capacity');
@@ -188,10 +189,12 @@ const setOnFormSubmit = (cb) => {
   });
 };
 
-const setOnFormReset = (cb) => {
-  adFormElement.addEventListener('reset', () => {
+
+const setOnFormReset = (reset) => {
+  resetButtonElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
     resetForm();
-    cb();
+    reset();
   });
 };
 

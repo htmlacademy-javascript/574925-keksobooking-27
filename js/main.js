@@ -10,7 +10,7 @@ import {
   setAvatar,
   setPhotos
 } from './form.js';
-import { disabledMapFilter, enabledMapFilter, setOnFilterChange, getFilteredOffers } from './filter.js';
+import { disabledMapFilter, enabledMapFilter, setOnFilterChange, getFilteredOffers, resetFilter } from './filter.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { showAlert, debounce } from './utils.js';
@@ -39,8 +39,10 @@ const onGetDataSuccess = (offers) => {
 
 const onSendDataSuccess = () => {
   resetForm();
+  resetFilter();
   resetCoordinate();
   showSuccessMessage();
+  getData(onGetDataSuccess, showAlert);
 };
 
 setOnMapLoad(() => {
@@ -51,8 +53,10 @@ setOnMapLoad(() => {
   resetCoordinate();
 });
 
-setOnFormReset(resetCoordinate);
-
+setOnFormReset(() => {
+  resetFilter();
+  getData(onGetDataSuccess, showAlert);
+});
 setOnFormSubmit(async (data) => {
   await sendData(onSendDataSuccess, showErrorMessage, data);
 });
