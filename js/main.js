@@ -1,7 +1,7 @@
 import { initMap, setOnMapLoad, setOnMainPinMove, setOtherPins, setMainPinCoordinate } from './map.js';
 import {
-  enabledAdForm,
-  disabledAdForm,
+  enableAdForm,
+  disableAdForm,
   setAddress,
   resetForm,
   setOnFormSubmit,
@@ -9,7 +9,7 @@ import {
   setAvatar,
   setPhotos
 } from './form.js';
-import { disabledMapFilter, enabledMapFilter, setOnFilterChange, getFilteredOffers, resetFilter } from './filter.js';
+import { disableMapFilter, enableMapFilter, setOnFilterChange, getFilteredOffers, resetFilter } from './filter.js';
 import { showErrorMessage, showSuccessMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { showAlert, debounce } from './utils.js';
@@ -19,8 +19,8 @@ const START_COORDINATE = {
   lng: 139.42500,
 };
 
-disabledAdForm();
-disabledMapFilter();
+disableAdForm();
+disableMapFilter();
 
 const resetCoordinate = () => {
   setMainPinCoordinate(START_COORDINATE);
@@ -33,7 +33,7 @@ const onGetDataSuccess = (offers) => {
     setOtherPins(getFilteredOffers(offers));
   }));
   setOtherPins(getFilteredOffers(offers));
-  enabledMapFilter();
+  enableMapFilter();
 };
 
 const onSendDataSuccess = () => {
@@ -45,7 +45,7 @@ const onSendDataSuccess = () => {
 };
 
 setOnMapLoad(() => {
-  enabledAdForm();
+  enableAdForm();
   setOnMainPinMove(setAddress);
   setAvatar();
   setPhotos();
