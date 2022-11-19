@@ -2,7 +2,7 @@ const successMessageTemplate = document.querySelector('#success').content.queryS
 const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 const bodyElement = document.querySelector('body');
 
-const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+const getIsEsc = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 const onErrorButtonClick = () => {
   hideMessage();
@@ -13,7 +13,7 @@ const onOverlayClick = () => {
 };
 
 const onMessageEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
+  if (getIsEsc(evt)) {
     evt.preventDefault();
     hideMessage();
   }
