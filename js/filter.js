@@ -28,10 +28,7 @@ const enabledMapFilter = () => {
     mapFilterInput.disabled = false;
   });
 };
-/**
- *
- *
- */
+
 const filterByType = (offer, type) =>
   type === 'any' || offer.offer.type === type;
 
@@ -100,8 +97,5 @@ const resetFilter = () => mapFilterElement.reset();
 const setOnFilterChange = (cb) => {
   mapFilterElement.addEventListener('change', () => cb());
 };
-/**
- *
- *
- */
+
 export { disabledMapFilter, enabledMapFilter, setOnFilterChange, getFilteredOffers, resetFilter, OFFERS_COUNT };
